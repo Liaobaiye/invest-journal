@@ -1,0 +1,235 @@
+/* 山寨币监测 — 页面样式，仅作用于 .altcoin-page */
+
+.altcoin-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.altcoin-page .page-header h1 {
+  margin: 0 0 6px;
+}
+
+.ac-toolbar {
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.ac-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+.ac-fields .form-input {
+  width: 72px;
+}
+
+.ac-progress {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ac-progress[hidden] {
+  display: none !important;
+}
+
+.ac-progress-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-subtle-2);
+  overflow: hidden;
+}
+
+.ac-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  transition: width 0.35s var(--ease-smooth);
+}
+
+.ac-meta {
+  margin-top: 10px;
+  font-size: 0.82rem;
+}
+
+.ac-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.ac-stats .ov-card {
+  background: var(--color-glass);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.ac-stats .ov-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-text-dim);
+  margin-bottom: 6px;
+}
+
+.ac-stats .ov-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.ac-stats .ov-card.danger .ov-value {
+  color: var(--color-red);
+}
+
+.ac-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.ac-list,
+.ac-chart {
+  padding: 16px;
+  min-height: 320px;
+}
+
+.ac-table-wrap {
+  overflow: auto;
+  max-height: 520px;
+  margin-top: 8px;
+}
+
+.ac-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.ac-table th {
+  text-align: left;
+  color: var(--color-text-dim);
+  font-weight: 500;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background: var(--color-surface);
+}
+
+.ac-table td {
+  padding: 9px 6px;
+  border-bottom: 1px solid var(--color-subtle);
+  white-space: nowrap;
+}
+
+.ac-table tbody tr {
+  cursor: pointer;
+  transition: background var(--duration-fast) ease;
+}
+
+.ac-table tbody tr:hover,
+.ac-table tbody tr.active {
+  background: var(--color-hover);
+}
+
+.ac-table tbody tr.active .ac-sym {
+  color: var(--color-accent);
+}
+
+.ac-ratio {
+  color: var(--color-red);
+  font-weight: 600;
+}
+
+.ac-chart-body {
+  margin-top: 8px;
+}
+
+.ac-chart-body canvas {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  background: var(--color-subtle);
+}
+
+@media (max-width: 960px) {
+  .ac-layout {
+    grid-template-columns: 1fr;
+  }
+  .ac-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 自动扫描开关 + 历史报告 */
+.altcoin-page .ac-auto-row {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.altcoin-page .ac-auto-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.altcoin-page .ac-auto-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+
+.altcoin-page .ac-auto-text .muted {
+  font-size: 0.78rem;
+}
+
+.altcoin-page .ac-notify {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--color-accent);
+}
+
+.altcoin-page .ac-history {
+  margin-top: 18px;
+  padding: 16px;
+}
+
+.altcoin-page .ac-history-hint {
+  margin: 4px 0 10px;
+  font-size: 0.8rem;
+}
+
+.altcoin-page .ac-history .panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.altcoin-page .ac-history-refresh {
+  margin-left: auto;
+  font-size: 0.78rem;
+}
+
+.altcoin-page .ac-history-table tbody tr {
+  cursor: pointer;
+}
+
+.altcoin-page .ac-open-hint {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+}
+

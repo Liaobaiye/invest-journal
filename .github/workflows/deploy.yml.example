@@ -1,0 +1,28 @@
+# 可选：push 到 main 后自动 SSH 到服务器更新
+# 使用前：
+#   1. GitHub 仓库 Settings → Secrets and variables → Actions 添加:
+#      SSH_HOST, SSH_USER, SSH_KEY, SSH_PORT(可选, 默认22), SSH_PATH(服务器项目绝对路径)
+#   2. 服务器已配置好 pm2 与项目目录
+#   3. 将本文件复制为 deploy.yml（去掉 .example 后缀）
+
+name: Deploy to server
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            set -e
+            cd ${{ secrets.SSH_PATH }}
+            bash scripts/deploy-server.sh

@@ -1,0 +1,147 @@
+.port-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ov-card {
+  padding: 18px 20px;
+  background: rgba(128, 128, 128, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ov-card.main { border-color: rgba(240, 192, 96, 0.3); }
+.ov-card.up { border-color: rgba(74, 222, 128, 0.25); }
+
+.ov-label {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.06em;
+}
+
+.ov-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pnl-section {
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.pnl-section .section-title { margin-bottom: 12px; }
+
+.pnl-section canvas {
+  width: 100%;
+  display: block;
+}
+
+.positions-section,
+.history-section {
+  margin-bottom: 28px;
+}
+
+.positions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.position-card {
+  padding: 18px;
+}
+
+.pos-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.pos-inst {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pos-side {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.pos-side.up {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color-green);
+}
+
+.pos-side.down {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--color-red);
+}
+
+.pos-lever {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background: rgba(240, 192, 96, 0.12);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.pos-closed {
+  font-size: 0.7rem;
+  color: var(--color-text-dim);
+  border: 1px solid var(--color-border);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.pos-pnl {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.pos-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.pos-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pos-stats .k {
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+}
+
+.pos-stats .v {
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .positions-grid { grid-template-columns: 1fr; }
+}

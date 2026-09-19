@@ -1,0 +1,25 @@
+{
+  "name": "myweb-server",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "轻量模块化后端 — 投资日志",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed": "node src/db/seed.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.16",
+    "undici": "^6.21.0"
+  }
+}
