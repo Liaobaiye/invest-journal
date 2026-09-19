@@ -134,7 +134,13 @@ async function loadMarket(main) {
 
     const parsed = (Array.isArray(candles) ? candles : []).map((c) => ({
       ts: Number(c[0]), open: Number(c[1]), high: Number(c[2]), low: Number(c[3]), close: Number(c[4]),
-    })).filter((c) => !Number.isNaN(c.close));
+      confirm: c[8] == null ? 1 : Number(c[8]),
+    }))
+      .filter((c) => Number.isFinite(c.close) && Number.isFinite(c.open) && Number.isFinite(c.high) && Number.isFinite(c.low))
+      // OKX 返回「最新在前」；绘图按时间从左到右（旧→新）
+      .sort((a, b) => a.ts - b.ts)
+      // 去掉未收盘的最后一根，避免半截柱
+      .filter((c, i, arr) => !(i === arr.length - 1 && c.confirm === 0));
 
     renderMiniCandles(main.querySelector('#market-mini'), parsed.slice(-12));
     renderCandles(main.querySelector('#candle-bars'), parsed);
@@ -154,19 +160,27 @@ function renderMiniCandles(el, candles) {
 }
 
 function renderCandles(el, candles) {
-  if (!el || !candles.length) return;
+  if (!el) return;
+  if (!candles.length) {
+    el.innerHTML = '<div class="chart-loading">暂无 K 线数据</div>';
+    return;
+  }
   const all = candles.flatMap((c) => [c.high, c.low]);
   const min = Math.min(...all);
   const max = Math.max(...all);
   const range = max - min || 1;
+  // 留 6% 边距，避免最高/最低贴边
+  const padPct = 3;
+  const plot = 100 - padPct * 2;
   el.innerHTML = candles.map((c, i) => {
-    const wickTop = ((max - c.high) / range) * 90;
-    const wickH = ((c.high - c.low) / range) * 90;
-    const bodyTop = ((max - Math.max(c.open, c.close)) / range) * 90;
-    const bodyH = Math.max(1.5, (Math.abs(c.open - c.close) / range) * 90);
+    const y = (price) => padPct + ((max - price) / range) * plot;
+    const wickTop = y(c.high);
+    const wickH = Math.max(0.8, y(c.low) - y(c.high));
+    const bodyTop = y(Math.max(c.open, c.close));
+    const bodyH = Math.max(1.2, Math.abs(c.open - c.close) / range * plot);
     const cls = c.close >= c.open ? 'up' : 'down';
     return `
-      <div class="candle" style="animation-delay:${i * 0.03}s">
+      <div class="candle" style="animation-delay:${Math.min(i * 0.02, 0.6)}s" title="${new Date(c.ts).toISOString().slice(0, 10)}  O:${c.open}  H:${c.high}  L:${c.low}  C:${c.close}">
         <div class="candle-wick" style="height:${wickH}%;top:${wickTop}%"></div>
         <div class="candle-body ${cls}" style="height:${bodyH}%;top:${bodyTop}%"></div>
       </div>

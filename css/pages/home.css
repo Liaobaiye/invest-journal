@@ -215,6 +215,7 @@
   display: grid;
   grid-template-columns: 1.35fr minmax(300px, 0.65fr);
   gap: 24px;
+  align-items: stretch;
 }
 
 .chart-strip,
@@ -225,52 +226,67 @@
   padding: 20px;
 }
 
+.chart-strip {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
 .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .chart-header .section-title { margin-bottom: 0; }
 
 .btc-price { font-size: 0.95rem; font-weight: 700; }
 .btc-price small { opacity: 0.8; font-size: 0.8em; }
+.btc-price.up { color: #4ade80; }
+.btc-price.down { color: #f87171; }
 
 .candle-bars {
   position: relative;
-  height: 90px;
+  flex: 1;
+  min-height: 180px;
+  height: 200px;
   display: flex;
   align-items: stretch;
   gap: 3px;
-  padding-top: 8px;
+  padding: 4px 0 2px;
 }
 
 .candle {
   position: relative;
-  flex: 1;
-  min-width: 3px;
-  animation: candle-in 0.5s var(--ease-out-expo) both;
+  flex: 1 1 0;
+  min-width: 2px;
+  max-width: 14px;
+  margin: 0 auto;
+  animation: candle-in 0.45s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
 }
 
 @keyframes candle-in {
-  from { opacity: 0; transform: scaleY(0.3); }
+  from { opacity: 0; transform: scaleY(0.35); }
   to { opacity: 1; transform: scaleY(1); }
 }
 
 .candle-wick {
   position: absolute;
   left: 50%;
-  width: 1px;
+  width: 1.5px;
+  min-height: 1px;
   transform: translateX(-50%);
-  background: rgba(128, 128, 128, 0.45);
+  background: rgba(160, 160, 170, 0.55);
 }
 
 .candle-body {
   position: absolute;
-  left: 15%;
-  right: 15%;
-  border-radius: 1px;
+  left: 18%;
+  right: 18%;
+  border-radius: 1.5px;
+  min-height: 2px;
 }
 
 .candle-body.up { background: linear-gradient(180deg, #4ade80, #22c55e); }
@@ -279,6 +295,8 @@
 .chart-loading {
   color: var(--color-text-dim);
   font-size: 0.85rem;
+  align-self: center;
+  margin: auto;
 }
 
 .latest-head {

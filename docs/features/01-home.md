@@ -22,11 +22,13 @@
 
 ```
 HomePage → api.ticker + api.candles + api.listPosts + api.stats
+        → 按时间升序整理 K 线（OKX 返回最新在前）
         → 更新 #btc-price / #candle-bars / #home-posts / #stat-*
 ```
 
 - 行情失败：`api.js` 演示模式提供假 K 线/价格
 - 文章列表：服务端 `/api/posts?limit=3`
+- 「市场律动」：`candle-bars` 随左栏卡片拉高，柱体按 high–low 全距绘制
 
 ## 如何修改
 
@@ -36,6 +38,7 @@ HomePage → api.ticker + api.candles + api.listPosts + api.stats
 | 改统计项 | `#stats-row` 模板 + `animateNumber` |
 | 改 Hero 文案 | `main.innerHTML` 模板字符串 |
 | 迷你 K 线数量 | `renderMiniCandles(..., parsed.slice(-12))` |
+| 市场律动柱高/留白 | `css/pages/...` `.candle-bars` + `renderCandles` 的 `padPct` |
 
 ## 隔离边界
 
@@ -46,3 +49,4 @@ HomePage → api.ticker + api.candles + api.listPosts + api.stats
 ## 变更记录
 
 - 2026-09: 演示模式行情 + 真实 posts
+- 2026-09: 修复市场律动：K 线时间轴改为旧→新、图区加高随卡片拉伸、柱体留白与 tooltip
